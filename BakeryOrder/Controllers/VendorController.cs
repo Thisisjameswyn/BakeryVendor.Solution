@@ -7,51 +7,51 @@ namespace BakeryOrder.Controllers
   public class VendorController : Controller
   {
 
-    [HttpGet("/vendor")]
+    [HttpGet("/vendors")]
     public ActionResult Index()
     {
       List<Vendor> allVendors = Vendor.GetAll();
       return View(allVendors);
     }
 
-    [HttpGet("/vendor/new")]
+    [HttpGet("/vendors/new")]
     public ActionResult New()
     {
       return View();
     }
 
-    [HttpPost("/vendor")]
+    [HttpPost("/vendors")]
     public ActionResult Create(string vendorName)
     {
       Vendor myVendor = new Vendor(vendorName);
       return RedirectToAction("Index");
     }
 
-    [HttpPost("/vendor/delete")]
+    [HttpPost("/vendors/delete")]
     public ActionResult DeleteAll()
     {
       Vendor.ClearAll();
       return View();
     }
 
-    [HttpGet("/vendor/{id}")]
+    [HttpGet("/vendors/{id}")]
     public ActionResult Show(int id)
     {
       Vendor foundVendor = Vendor.Find(id);
       return View(foundVendor);
     }
 
-    [HttpPost("/categories/{categoryId}/items")]
-    public ActionResult Create(int categoryId, string itemDescription)
-    {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Category foundCategory = Category.Find(categoryId);
-      Item newItem = new Item(itemDescription);
-      foundCategory.AddItem(newItem);
-      List<Item> categoryItems = foundCategory.Items;
-      model.Add("items", categoryItems);
-      model.Add("category", foundCategory);
-      return View("Show", model);
-    }
+    // [HttpPost("/categories/{categoryId}/items")]
+    // public ActionResult Create(int categoryId, string itemDescription)
+    // {
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   Category foundCategory = Category.Find(categoryId);
+    //   Item newItem = new Item(itemDescription);
+    //   foundCategory.AddItem(newItem);
+    //   List<Item> categoryItems = foundCategory.Items;
+    //   model.Add("items", categoryItems);
+    //   model.Add("category", foundCategory);
+    //   return View("Show", model);
+    // }
   }
 }

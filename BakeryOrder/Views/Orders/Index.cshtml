@@ -9,12 +9,12 @@
 <ul>
   @foreach (Orders order in Model)
   {
-    <li><a href="/order/@order.Id">@order.CityName</a></li>
+    <li><a href="/orders/@order.Id">@order.OrderName</a></li>
   }
 </ul>
-<a href="/order/new">Add a new order.</a>
+<a href="/orders/new">Add a new order.</a>
 @* <a href="/vendor/@vendor.Id">Return to vendor.</a> *@
 
-<form action="/order/delete" method="post">
+<form action="/orders/delete" method="post">
   <button type="submit" name="button">Clear All orders</button>
 </form>

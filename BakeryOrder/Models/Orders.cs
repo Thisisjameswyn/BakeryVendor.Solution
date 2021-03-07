@@ -4,14 +4,14 @@ namespace BakeryOrder.Models
 {
   public class Orders
   {
-    public string CityName { get; set; }
+    public string OrderName { get; set; }
 
     public int Id { get; }
     private static List<Orders> _instances = new List<Orders> { };
 
-    public Orders(string cityName)
+    public Orders(string orderName)
     {
-      CityName = cityName;
+      OrderName = orderName;
       _instances.Add(this);
       Id = _instances.Count;
     }

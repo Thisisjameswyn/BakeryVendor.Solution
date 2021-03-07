@@ -7,34 +7,34 @@ namespace BakeryOrder.Controllers
   public class OrderController : Controller
   {
 
-    [HttpGet("/order")]
+    [HttpGet("/orders")]
     public ActionResult Index()
     {
       List<Orders> allOrders = Orders.GetAll();
       return View(allOrders);
     }
 
-    [HttpGet("/order/new")]
+    [HttpGet("/orders/new")]
     public ActionResult New()
     {
       return View();
     }
 
-    [HttpPost("/order")]
+    [HttpPost("/orders")]
     public ActionResult Create(string cityName)
     {
       Orders myOrder = new Orders(cityName);
       return RedirectToAction("Index");
     }
 
-    [HttpPost("/order/delete")]
+    [HttpPost("/orders/delete")]
     public ActionResult DeleteAll()
     {
       Orders.ClearAll();
       return View();
     }
 
-    [HttpGet("/order/{id}")]
+    [HttpGet("/orders/{id}")]
     public ActionResult Show(int id)
     {
       Orders foundOrders = Orders.Find(id);
