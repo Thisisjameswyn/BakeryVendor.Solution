@@ -13,13 +13,6 @@ namespace BakeryOrder.Controllers
       return View(vendor);
     }
 
-    [HttpPost("/orders/delete")]
-    public ActionResult DeleteAll()
-    {
-      Orders.ClearAll();
-      return View();
-    }
-
     [HttpGet("/vendor/{vendorId}/orders/{orderId}")]
     public ActionResult Show(int vendorId, int orderId)
     {
