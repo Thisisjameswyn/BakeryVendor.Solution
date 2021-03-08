@@ -7,51 +7,55 @@ namespace BakeryOrder.Controllers
   public class VendorController : Controller
   {
 
-    [HttpGet("/vendors")]
+    [HttpGet("/vendor")]
     public ActionResult Index()
     {
       List<Vendor> allVendors = Vendor.GetAll();
       return View(allVendors);
     }
 
-    [HttpGet("/vendors/new")]
+    [HttpGet("/vendor/new")]
     public ActionResult New()
     {
       return View();
     }
 
-    [HttpPost("/vendors")]
+    [HttpPost("/vendor")]
     public ActionResult Create(string vendorName)
     {
       Vendor myVendor = new Vendor(vendorName);
       return RedirectToAction("Index");
     }
 
-    [HttpPost("/vendors/delete")]
+    [HttpPost("/vendor/delete")]
     public ActionResult DeleteAll()
     {
       Vendor.ClearAll();
       return View();
     }
 
-    [HttpGet("/vendors/{id}")]
+    [HttpGet("/vendor/{id}")]
     public ActionResult Show(int id)
     {
-      Vendor foundVendor = Vendor.Find(id);
-      return View(foundVendor);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Vendor selectedVendor = Vendor.Find(id);
+      List<Orders> vendorOrders = selectedVendor.Orders;
+      model.Add("vendor", selectedVendor);
+      model.Add("orders", vendorOrders);
+      return View(model);
     }
 
-    // [HttpPost("/categories/{categoryId}/items")]
-    // public ActionResult Create(int categoryId, string itemDescription)
-    // {
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category foundCategory = Category.Find(categoryId);
-    //   Item newItem = new Item(itemDescription);
-    //   foundCategory.AddItem(newItem);
-    //   List<Item> categoryItems = foundCategory.Items;
-    //   model.Add("items", categoryItems);
-    //   model.Add("category", foundCategory);
-    //   return View("Show", model);
-    // }
+    [HttpPost("/vendor/{vendorId}/orders")]
+    public ActionResult Create(int vendorId, string orderDescription)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Vendor foundVendor = Vendor.Find(vendorId);
+      Orders newOrder = new Orders(orderDescription);
+      foundVendor.AddOrder(newOrder);
+      List<Orders> vendorOrders = foundVendor.Orders;
+      model.Add("orders", vendorOrders);
+      model.Add("vendor", foundVendor);
+      return View("Show", model);
+    }
   }
 }

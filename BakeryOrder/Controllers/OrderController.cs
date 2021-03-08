@@ -6,18 +6,11 @@ namespace BakeryOrder.Controllers
 {
   public class OrderController : Controller
   {
-
-    [HttpGet("/orders")]
-    public ActionResult Index()
+    [HttpGet("/vendor/{vendorId}/orders/new")]
+    public ActionResult New(int vendorId)
     {
-      List<Orders> allOrders = Orders.GetAll();
-      return View(allOrders);
-    }
-
-    [HttpGet("/orders/new")]
-    public ActionResult New()
-    {
-      return View();
+      Vendor vendor = Vendor.Find(vendorId);
+      return View(vendor);
     }
 
     [HttpPost("/orders")]
@@ -39,6 +32,17 @@ namespace BakeryOrder.Controllers
     {
       Orders foundOrders = Orders.Find(id);
       return View(foundOrders);
+    }
+
+    [HttpGet("/vendor/{vendorId}/orders/{orderId}")]
+    public ActionResult Show(int vendorId, int orderId)
+    {
+      Orders order = Orders.Find(orderId);
+      Vendor vendor = Vendor.Find(vendorId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("order", order);
+      model.Add("vendor", vendor);
+      return View(model);
     }
   }
 }

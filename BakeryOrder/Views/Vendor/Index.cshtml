@@ -9,12 +9,12 @@
 <ul>
   @foreach (Vendor vend in Model)
   {
-    <li><a href="/vendors/@vend.Id">@vend.VendorName</a></li>
+    <li><a href="/vendor/@vend.Id">@vend.VendorName</a></li>
   }
 </ul>
-<a href="/vendors/new">Add a new vendor.</a>
+<a href="/vendor/new">Add a new vendor.</a>
 <a href='/'>Return to home page</a>
 
-<form action="/vendors/delete" method="post">
+<form action="/vendor/delete" method="post">
   <button type="submit" name="button">Clear All vendors</button>
 </form>
