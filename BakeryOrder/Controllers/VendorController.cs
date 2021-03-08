@@ -21,9 +21,9 @@ namespace BakeryOrder.Controllers
     }
 
     [HttpPost("/vendor")]
-    public ActionResult Create(string vendorName)
+    public ActionResult Create(string vendorName, string vendorDescription)
     {
-      Vendor myVendor = new Vendor(vendorName);
+      Vendor myVendor = new Vendor(vendorName, vendorDescription);
       return RedirectToAction("Index");
     }
 
@@ -46,11 +46,11 @@ namespace BakeryOrder.Controllers
     }
 
     [HttpPost("/vendor/{vendorId}/orders")]
-    public ActionResult Create(int vendorId, string orderDescription)
+    public ActionResult Create(int vendorId, string orderName, string orderDescription, string orderDate, string orderPrice)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Vendor foundVendor = Vendor.Find(vendorId);
-      Orders newOrder = new Orders(orderDescription);
+      Orders newOrder = new Orders(orderName, orderDescription, orderDate, orderPrice);
       foundVendor.AddOrder(newOrder);
       List<Orders> vendorOrders = foundVendor.Orders;
       model.Add("orders", vendorOrders);

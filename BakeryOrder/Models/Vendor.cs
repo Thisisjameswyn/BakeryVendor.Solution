@@ -8,13 +8,16 @@ namespace BakeryOrder.Models
     
     public string VendorName { get; set; }
 
+    public string Description { get; set; }
+
     public int Id { get; }
 
     public List<Orders> Orders { get; set; }
 
-    public Vendor(string vendorName)
+    public Vendor(string vendorName, string vendorDescription)
     {
       VendorName = vendorName;
+      Description = vendorDescription;
       _instances.Add(this);
       Id = _instances.Count;
       Orders = new List<Orders>{};
