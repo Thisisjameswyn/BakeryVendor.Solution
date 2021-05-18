@@ -5,10 +5,10 @@
 <p>Vendor description: @Model["vendor"].Description</p>
 
 <ol>
-@foreach (Orders order in @Model["orders"])
-{
-  <li><a href='/vendor/@Model["vendor"].Id/orders/@order.Id'>@order.OrderName</a></li>
-}
+  @foreach (Order order in @Model["orders"])
+  {
+    <li><a href='/vendor/@Model["vendor"].Id/orders/@order.Id'>@order.OrderName</a></li>
+  }
 </ol>
 
 <p><a href='/vendor/@Model["vendor"].Id/orders/new'>Add a new order</a></p>

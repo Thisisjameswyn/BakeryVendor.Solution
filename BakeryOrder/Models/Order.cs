@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BakeryOrder.Models
 {
-  public class Orders
+  public class Order
   {
     public string OrderName { get; set; }
 
@@ -13,9 +13,9 @@ namespace BakeryOrder.Models
     public string OrderPrice { get; set; }
 
     public int Id { get; }
-    private static List<Orders> _instances = new List<Orders> { };
+    private static List<Order> _instances = new List<Order> { };
 
-    public Orders(string orderName, string orderDescription, string orderDate, string orderPrice)
+    public Order(string orderName, string orderDescription, string orderDate, string orderPrice)
     {
       OrderName = orderName;
       OrderDescription = orderDescription;
@@ -25,7 +25,7 @@ namespace BakeryOrder.Models
       Id = _instances.Count;
     }
 
-    public static Orders Find(int searchId)
+    public static Order Find(int searchId)
     {
       return _instances[searchId - 1];
     }

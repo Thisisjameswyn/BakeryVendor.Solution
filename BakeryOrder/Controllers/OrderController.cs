@@ -16,7 +16,7 @@ namespace BakeryOrder.Controllers
     [HttpGet("/vendor/{vendorId}/orders/{orderId}")]
     public ActionResult Show(int vendorId, int orderId)
     {
-      Orders order = Orders.Find(orderId);
+      Order order = Order.Find(orderId);
       Vendor vendor = Vendor.Find(vendorId);
       Dictionary<string, object> model = new Dictionary<string, object>();
       model.Add("order", order);
