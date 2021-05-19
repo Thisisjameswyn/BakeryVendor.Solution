@@ -1,114 +1,110 @@
-// using Microsoft.VisualStudio.TestTools.UnitTesting;
-// using System.Collections.Generic;
-// using BakeryOrder.Models;
-// using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using BakeryOrder.Models;
+using System;
 
-// namespace ToDoList.Tests
-// {
-//   [TestClass]
-//   public class ItemTests : IDisposable
-//   {
+namespace BakeryOrder.Tests
+{
+  [TestClass]
+  public class OrderTests : IDisposable
+  {
 
-//     public void Dispose()
-//     {
-//       Order.ClearAll();
-//     }
+    public void Dispose()
+    {
+      Order.ClearAll();
+    }
 
-//     [TestMethod]
-//     public void ItemConstructor_CreatesInstanceOfItem_Item()
-//     {
-//       Order newItem = new Order("test");
-//       Assert.AreEqual(typeof(Order), newItem.GetType());
-//     }
+    [TestMethod]
+    public void OrderConstructor_CreatesInstanceOfOrder_Order()
+    {
+      string oName = "Order";
+      string oDescription = "Buy Stuff.";
+      string oDate = "Today";
+      string oPrice = "Free";
+      Order newOrder = new Order(oName, oDescription, oDate, oPrice);
+      Assert.AreEqual(typeof(Order), newOrder.GetType());
+    }
 
-//     [TestMethod]
-//     public void GetDescription_ReturnsDescription_String()
-//     {
-//       //Arrange
-//       string description = "Walk the dog.";
+    [TestMethod]
+    public void GetDescription_ReturnsDescription_String()
+    {
+      string oName = "Order";
+      string oDescription = "Buy Stuff.";
+      string oDate = "Today";
+      string oPrice = "Free";
+      Order newOrder = new Order(oName, oDescription, oDate, oPrice);
+      string result = newOrder.OrderDescription;
+      Assert.AreEqual(oDescription, result);
+    }
 
-//       //Act
-//       Order newOrder = new Order(description);
-//       string result = newOrder.OrderDescription;
+    [TestMethod]
+    public void SetDescription_SetDescription_String()
+    {
+      string oName = "Order";
+      string oDescription = "Buy Stuff.";
+      string oDate = "Today";
+      string oPrice = "Free";
+      Order newOrder = new Order(oName, oDescription, oDate, oPrice);
+      string updatedDescription = "Do other stuff";
+      newOrder.OrderDescription = updatedDescription;
+      string result = newOrder.OrderDescription;
+      Assert.AreEqual(updatedDescription, result);
+    }
 
-//       //Assert
-//       Assert.AreEqual(description, result);
-//     }
+    // [TestMethod]
+    // public void GetAll_ReturnsEmptyList_ItemList()
+    // {
+    //   // Arrange
+    //   List<Order> newList = new List<Order> { };
 
-//     [TestMethod]
-//     public void SetDescription_SetDescription_String()
-//     {
-//       //Arrange
-//       string description = "Walk the dog.";
-//       Order newOrder = new Order(description);
+    //   // Act
+    //   List<Order> result = Order.GetAll();
 
-//       //Act
-//       string updatedDescription = "Do the dishes";
-//       newOrder.Description = updatedDescription;
-//       string result = newOrder.Description;
+    //   // Assert
+    //   CollectionAssert.AreEqual(newList, result);
+    // }
 
-//       //Assert
-//       Assert.AreEqual(updatedDescription, result);
-//     }
+    // [TestMethod]
+    // public void GetAll_ReturnsItems_ItemList()
+    // {
+    //   //Arrange
+    //   string description01 = "Walk the dog";
+    //   string description02 = "Wash the dishes";
+    //   Order newOrder1 = new Order(description01);
+    //   Order newOrder2 = new Order(description02);
+    //   List<Order> newList = new List<Order> { newOrder1, newOrder2 };
 
-//     [TestMethod]
-//     public void GetAll_ReturnsEmptyList_ItemList()
-//     {
-//       // Arrange
-//       List<Order> newList = new List<Order> { };
+    //   //Act
+    //   List<Order> result = Order.GetAll();
 
-//       // Act
-//       List<Order> result = Order.GetAll();
+    //   //Assert
+    //   CollectionAssert.AreEqual(newList, result);
+    // }
 
-//       // Assert
-//       CollectionAssert.AreEqual(newList, result);
-//     }
+    [TestMethod]
+    public void GetId_OrdersInstantiateWithAnIdAndGetterReturns_Int()
+    {
+      string oName = "Order";
+      string oDescription = "Buy Stuff.";
+      string oDate = "Today";
+      string oPrice = "Free";
+      Order newOrder = new Order(oName, oDescription, oDate, oPrice);
+      int result = newOrder.Id;
+      Assert.AreEqual(1, result);
+    }
 
-//     [TestMethod]
-//     public void GetAll_ReturnsItems_ItemList()
-//     {
-//       //Arrange
-//       string description01 = "Walk the dog";
-//       string description02 = "Wash the dishes";
-//       Order newOrder1 = new Order(description01);
-//       Order newOrder2 = new Order(description02);
-//       List<Order> newList = new List<Order> { newOrder1, newOrder2 };
-
-//       //Act
-//       List<Order> result = Order.GetAll();
-
-//       //Assert
-//       CollectionAssert.AreEqual(newList, result);
-//     }
-
-//     [TestMethod]
-//     public void GetId_ItemsInstantiateWithAnIdAndGetterReturns_Int()
-//     {
-//       //Arrange
-//       string description = "Walk the dog.";
-//       Order newOrder = new Order(description);
-
-//       //Act
-//       int result = newOrder.Id;
-
-//       //Assert
-//       Assert.AreEqual(1, result);
-//     }
-
-//     [TestMethod]
-//     public void Find_ReturnsCorrectItem_Item()
-//     {
-//       //Arrange
-//       string description01 = "Walk the dog";
-//       string description02 = "Wash the dishes";
-//       Order newOrder1 = new Order(description01);
-//       Order newOrder2 = new Order(description02);
-
-//       //Act
-//       Order result = Order.Find(2);
-
-//       //Assert
-//       Assert.AreEqual(newOrder2, result);
-//     }
-//   }
-// }
+    [TestMethod]
+    public void Find_ReturnsCorrectOrder_Order()
+    {
+      string oName1 = "Order1";
+      string oName2 = "Order2";
+      string oDescription = "Buy Stuff.";
+      string oDate = "Today";
+      string oPrice = "Free";
+      Order newOrder1 = new Order(oName1, oDescription, oDate, oPrice);
+      Order newOrder2 = new Order(oName2, oDescription, oDate, oPrice);
+      Order result = Order.Find(2);
+      Assert.AreEqual(newOrder2, result);
+    }
+  }
+}
